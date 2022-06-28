@@ -19,13 +19,14 @@ func main() {
 
 	fmt.Println("Command choose was", command, "and it's address is", &command)
 
-	if command == 1 {
+	switch command {
+	case 1:
 		fmt.Println("Monitor")
-	} else if command == 2 {
+	case 2:
 		fmt.Println("Logs")
-	} else if command == 0 {
+	case 0:
 		fmt.Println("Bye Bye")
-	} else {
+	default:
 		fmt.Println("Option inserted don't exist")
 	}
 }
