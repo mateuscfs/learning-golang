@@ -15,7 +15,7 @@ func main() {
 	fmt.Println("0 - Exit Program")
 
 	var command int
-	fmt.Scanf("%d", &command)
+	fmt.Scan(&command)
 
 	fmt.Println("Command choose was", command, "and it's address is", &command)
 }
