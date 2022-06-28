@@ -18,4 +18,14 @@ func main() {
 	fmt.Scan(&command)
 
 	fmt.Println("Command choose was", command, "and it's address is", &command)
+
+	if command == 1 {
+		fmt.Println("Monitor")
+	} else if command == 2 {
+		fmt.Println("Logs")
+	} else if command == 0 {
+		fmt.Println("Bye Bye")
+	} else {
+		fmt.Println("Option inserted don't exist")
+	}
 }
