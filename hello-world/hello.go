@@ -27,9 +27,9 @@ func main() {
 }
 
 func viewIntroduction() {
-	name := "Mateus"
+	name, age := getNameAndAge()
 	version := 1.1
-	fmt.Println("Hello Mr.", name)
+	fmt.Println("Hello Mr.", name, ", your age is", age)
 	fmt.Println("This program is on version", version)
 }
 
@@ -45,4 +45,11 @@ func readCommand() int {
 
 	fmt.Println("Command choose was", readCommand, "and it's address is", &readCommand)
 	return readCommand
+}
+
+func getNameAndAge() (string, int) {
+	name := "Mateus"
+	age := 28
+
+	return name, age
 }
