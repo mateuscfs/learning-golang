@@ -5,19 +5,11 @@ import (
 )
 
 func main() {
-	name := "Mateus"
-	version := 1.1
-	fmt.Println("Hello Mr.", name)
-	fmt.Println("This program is on version", version)
+	viewIntroduction()
 
-	fmt.Println("1 - Start Monitoring")
-	fmt.Println("2 - Show Logs")
-	fmt.Println("0 - Exit Program")
+	showMenu()
 
-	var command int
-	fmt.Scan(&command)
-
-	fmt.Println("Command choose was", command, "and it's address is", &command)
+	command := readCommand()
 
 	switch command {
 	case 1:
@@ -29,4 +21,25 @@ func main() {
 	default:
 		fmt.Println("Option inserted don't exist")
 	}
+}
+
+func viewIntroduction() {
+	name := "Mateus"
+	version := 1.1
+	fmt.Println("Hello Mr.", name)
+	fmt.Println("This program is on version", version)
+}
+
+func showMenu() {
+	fmt.Println("1 - Start Monitoring")
+	fmt.Println("2 - Show Logs")
+	fmt.Println("0 - Exit Program")
+}
+
+func readCommand() int {
+	var readCommand int
+	fmt.Scan(&readCommand)
+
+	fmt.Println("Command choose was", readCommand, "and it's address is", &readCommand)
+	return readCommand
 }
