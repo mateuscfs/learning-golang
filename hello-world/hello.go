@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 )
 
 func main() {
@@ -18,8 +19,10 @@ func main() {
 		fmt.Println("Logs")
 	case 0:
 		fmt.Println("Bye Bye")
+		os.Exit(0)
 	default:
 		fmt.Println("Option inserted don't exist")
+		os.Exit(-1)
 	}
 }
 
