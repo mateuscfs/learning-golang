@@ -9,21 +9,23 @@ import (
 func main() {
 	viewIntroduction()
 
-	showMenu()
+	for {
+		showMenu()
 
-	command := readCommand()
+		command := readCommand()
 
-	switch command {
-	case 1:
-		startMonitoring()
-	case 2:
-		fmt.Println("Logs")
-	case 0:
-		fmt.Println("Bye Bye")
-		os.Exit(0)
-	default:
-		fmt.Println("Option inserted don't exist")
-		os.Exit(-1)
+		switch command {
+		case 1:
+			startMonitoring()
+		case 2:
+			fmt.Println("Logs")
+		case 0:
+			fmt.Println("Bye Bye")
+			os.Exit(0)
+		default:
+			fmt.Println("Option inserted don't exist")
+			os.Exit(-1)
+		}
 	}
 }
 
