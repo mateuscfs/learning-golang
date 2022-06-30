@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 )
 
@@ -14,7 +15,7 @@ func main() {
 
 	switch command {
 	case 1:
-		fmt.Println("Monitor")
+		startMonitoring()
 	case 2:
 		fmt.Println("Logs")
 	case 0:
@@ -52,4 +53,15 @@ func getNameAndAge() (string, int) {
 	age := 28
 
 	return name, age
+}
+
+func startMonitoring() {
+	fmt.Println("Monitoring...")
+	site := "https://www.google.com"
+	res, _ := http.Get(site)
+	if res.StatusCode == 200 {
+		fmt.Println("Site: ", site, "is online!")
+	} else {
+		fmt.Println("Site: ", site, "is offline!")
+	}
 }
