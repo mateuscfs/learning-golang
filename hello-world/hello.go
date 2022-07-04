@@ -59,6 +59,12 @@ func getNameAndAge() (string, int) {
 
 func startMonitoring() {
 	fmt.Println("Monitoring...")
+
+	var sites [4]string // Array on GoLang has fixed value
+	sites[0] = "https://www.google.com"
+	sites[1] = "https://alura.com.br"
+	sites[2] = "https://caelum.com.br"
+
 	site := "https://www.google.com"
 	res, _ := http.Get(site)
 	if res.StatusCode == 200 {
