@@ -62,13 +62,13 @@ func startMonitoring() {
 
 	sites := getSites()
 
-	for i := 0; i < len(sites); i++ {
-		res, _ := http.Get(sites[i])
+	for _, site := range sites {
+		res, _ := http.Get(site)
 
 		if res.StatusCode == 200 {
-			fmt.Println("Site: ", sites[i], "is online!")
+			fmt.Println("Site: ", site, "is online!")
 		} else {
-			fmt.Println("Site: ", sites[i], "is offline!")
+			fmt.Println("Site: ", site, "is offline!")
 		}
 	}
 }
