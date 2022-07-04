@@ -4,7 +4,11 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"time"
 )
+
+const monitorSize = 3
+const monitorDelay = 5
 
 func main() {
 	viewIntroduction()
@@ -47,6 +51,7 @@ func readCommand() int {
 	fmt.Scan(&readCommand)
 
 	fmt.Println("Command choose was", readCommand, "and it's address is", &readCommand)
+	fmt.Println((""))
 	return readCommand
 }
 
@@ -62,14 +67,18 @@ func startMonitoring() {
 
 	sites := getSites()
 
-	for _, site := range sites {
-		res, _ := http.Get(site)
+	for i := 0; i < monitorSize; i++ {
+		for _, site := range sites {
+			res, _ := http.Get(site)
 
-		if res.StatusCode == 200 {
-			fmt.Println("Site: ", site, "is online!")
-		} else {
-			fmt.Println("Site: ", site, "is offline!")
+			if res.StatusCode == 200 {
+				fmt.Println("Site: ", site, "is online!")
+			} else {
+				fmt.Println("Site: ", site, "is offline!")
+			}
 		}
+		time.Sleep(monitorDelay * time.Second)
+		fmt.Println("")
 	}
 }
 
