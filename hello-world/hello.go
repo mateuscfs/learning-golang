@@ -60,16 +60,22 @@ func getNameAndAge() (string, int) {
 func startMonitoring() {
 	fmt.Println("Monitoring...")
 
-	var sites [4]string // Array on GoLang has fixed value
-	sites[0] = "https://www.google.com"
-	sites[1] = "https://alura.com.br"
-	sites[2] = "https://caelum.com.br"
+	sites := getSites()
 
-	site := "https://www.google.com"
-	res, _ := http.Get(site)
-	if res.StatusCode == 200 {
-		fmt.Println("Site: ", site, "is online!")
-	} else {
-		fmt.Println("Site: ", site, "is offline!")
+	for i := 0; i < len(sites); i++ {
+		res, _ := http.Get(sites[i])
+
+		if res.StatusCode == 200 {
+			fmt.Println("Site: ", sites[i], "is online!")
+		} else {
+			fmt.Println("Site: ", sites[i], "is offline!")
+		}
 	}
+}
+
+func getSites() []string {
+	sites := []string{"https://www.google.com", "https://www.alura.com.br"}
+	sites = append(sites, "https://www.caelum.com.br")
+
+	return sites
 }
