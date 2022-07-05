@@ -69,7 +69,12 @@ func startMonitoring() {
 
 	for i := 0; i < monitorSize; i++ {
 		for _, site := range sites {
-			res, _ := http.Get(site)
+			res, err := http.Get(site)
+
+			if err != nil {
+				fmt.Println("Error", err)
+				return
+			}
 
 			if res.StatusCode == 200 {
 				fmt.Println("Site: ", site, "is online!")
