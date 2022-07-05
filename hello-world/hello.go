@@ -74,10 +74,7 @@ func startMonitoring() {
 		for _, site := range sites {
 			res, err := http.Get(site)
 
-			if err != nil {
-				fmt.Println("Error", err)
-				return
-			}
+			printErr(err)
 
 			if res.StatusCode == 200 {
 				fmt.Println("Site: ", site, "is online!")
@@ -93,9 +90,7 @@ func startMonitoring() {
 func readSites() []string {
 	file, err := os.Open("sites.txt")
 
-	if err != nil {
-		fmt.Println("Error:", err)
-	}
+	printErr(err)
 
 	var sites []string
 
@@ -111,5 +106,13 @@ func readSites() []string {
 		}
 	}
 
+	file.Close()
+
 	return sites
+}
+
+func printErr(err error) {
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
 }
