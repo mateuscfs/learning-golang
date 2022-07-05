@@ -1,9 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -65,7 +68,7 @@ func getNameAndAge() (string, int) {
 func startMonitoring() {
 	fmt.Println("Monitoring...")
 
-	sites := getSites()
+	sites := readSites()
 
 	for i := 0; i < monitorSize; i++ {
 		for _, site := range sites {
@@ -87,9 +90,26 @@ func startMonitoring() {
 	}
 }
 
-func getSites() []string {
-	sites := []string{"https://www.google.com", "https://www.alura.com.br"}
-	sites = append(sites, "https://www.caelum.com.br")
+func readSites() []string {
+	file, err := os.Open("sites.txt")
+
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+
+	var sites []string
+
+	reader := bufio.NewReader(file)
+	for {
+		line, err := reader.ReadString('\n')
+		line = strings.TrimSpace(line)
+
+		sites = append(sites, line)
+
+		if err == io.EOF {
+			break
+		}
+	}
 
 	return sites
 }
