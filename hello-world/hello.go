@@ -6,12 +6,14 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
 
 const monitorSize = 3
 const monitorDelay = 5
+const dateFormat = "02/01/2006 15:04:05 -07:00"
 
 func main() {
 	viewIntroduction()
@@ -78,8 +80,10 @@ func startMonitoring() {
 
 			if res.StatusCode == 200 {
 				fmt.Println("Site: ", site, "is online!")
+				log(site, true)
 			} else {
 				fmt.Println("Site: ", site, "is offline!")
+				log(site, false)
 			}
 		}
 		time.Sleep(monitorDelay * time.Second)
@@ -115,4 +119,14 @@ func printErr(err error) {
 	if err != nil {
 		fmt.Println("Error:", err)
 	}
+}
+
+func log(site string, status bool) {
+	file, err := os.OpenFile("log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+
+	printErr(err)
+
+	file.WriteString(site + " - online: " + strconv.FormatBool(status) + " | " + time.Now().Format(dateFormat) + "\n")
+
+	file.Close()
 }
